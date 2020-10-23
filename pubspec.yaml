@@ -1,5 +1,5 @@
 name: padak_starter
-description: 파닥파닥 Flutter 서적 내 토이 프로젝트 기본 틀입니다.
+description: 初めてのflutterプロジェクト
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -24,7 +24,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
-  # 2-2. 상세화면 (NumberFormat 라이브러리 임포트)
+  # 2-2. 詳細画面 (NumberFormat ライブラリimport)
 
 dev_dependencies:
   flutter_test:
