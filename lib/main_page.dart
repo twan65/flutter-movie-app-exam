@@ -3,12 +3,22 @@ import "package:flutter/material.dart";
 // 1-2. タブ画面 (各画面のimport)
 
 // 1-2. タブ画面 (Stateless -> Stateful)
-class MainPage extends StatelessWidget {
+// ignore: must_be_immutable
+class MainPage extends StatefulWidget {
   // 1-2. タブ画面 (_selectedTabIndex変数を移動)
-  // タブインデックス設定
-  int _selectedTabIndex = 0;
 
   // 1-2. タブ画面 (createState関数追加)
+  @override
+  State<StatefulWidget> createState() {
+    return _MainPageState();
+  }
+
+}
+
+// State作成
+class _MainPageState extends State<MainPage> {
+
+  int _selectedTabIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +62,14 @@ class MainPage extends StatelessWidget {
         ],
         currentIndex: _selectedTabIndex,
         onTap: (index) {
-          _selectedTabIndex = index;
-          print("$_selectedTabIndex Tab Clicked");
+          setState(() {
+            _selectedTabIndex = index;
+            print("$_selectedTabIndex Tab Clicked");
+          });
         },
       ),
     );
   }
 }
-
-// State作成
 
 // List, Grid Widget変換
