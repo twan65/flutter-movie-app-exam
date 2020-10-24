@@ -5,7 +5,8 @@ import "package:flutter/material.dart";
 // 1-2. タブ画面 (Stateless -> Stateful)
 class MainPage extends StatelessWidget {
   // 1-2. タブ画面 (_selectedTabIndex変数を移動)
-  // 1-2. タブ画面 (タブインデックス設定)
+  // タブインデックス設定
+  int _selectedTabIndex = 0;
 
   // 1-2. タブ画面 (createState関数追加)
 
@@ -14,7 +15,7 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         // TOP画面のタイトル
-        title: Text('Movie'),
+        title: Text('Twan Movie'),
         // ポップアップボタン及びイベント追加
         actions: <Widget>[
           PopupMenuButton<int>(
@@ -34,13 +35,31 @@ class MainPage extends StatelessWidget {
           ),
         ],
       ),
+
       // 1-2. List, Grid Widget連動
       body: Center(child: Text("Hello Flutter")),
-      // 1-2. bottomNavigationBar追加
+      // bottomNavigationBar
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.view_list),
+            title: Text('List'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.grid_on),
+            title: Text('Grid'),
+          ),
+        ],
+        currentIndex: _selectedTabIndex,
+        onTap: (index) {
+          _selectedTabIndex = index;
+          print("$_selectedTabIndex Tab Clicked");
+        },
+      ),
     );
   }
 }
 
-// 1-2. 탭 화면 (State 구현)
+// State作成
 
-// 1-2. 탭 화면 (List, Grid Widget 반환)
+// List, Grid Widget変換
