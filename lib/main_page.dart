@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 
-// 1-2. タブ画面 (各画面のimport)
+import 'grid_page.dart';
+import 'list_page.dart';
 
 // 1-2. タブ画面 (Stateless -> Stateful)
 // ignore: must_be_immutable
@@ -42,8 +43,9 @@ class _MainPageState extends State<MainPage> {
         ],
       ),
 
-      // 1-2. List, Grid Widget連動
-      body: Center(child: Text("Hello Flutter")),
+      // List, Grid Widget連動
+      body: _buildPage(_selectedTabIndex),
+
       // bottomNavigationBar
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
@@ -69,3 +71,7 @@ class _MainPageState extends State<MainPage> {
 }
 
 // List, Grid Widget変換
+Widget _buildPage(index) {
+  if(index == 0) return ListPage();
+  else return GridPage();
+}
