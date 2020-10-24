@@ -16,7 +16,7 @@ class ListPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Image.network(
-                  'https://img4.yna.co.kr/etc/inner/KR/2019/06/25/AKR20190625020900005_01_i_P4.jpg',
+                  '',
                 height: 120),
               Padding(
                 padding: EdgeInsets.all(8.0),
