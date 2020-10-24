@@ -5,14 +5,10 @@ import "package:flutter/material.dart";
 // 1-2. タブ画面 (Stateless -> Stateful)
 // ignore: must_be_immutable
 class MainPage extends StatefulWidget {
-  // 1-2. タブ画面 (_selectedTabIndex変数を移動)
-
-  // 1-2. タブ画面 (createState関数追加)
   @override
   State<StatefulWidget> createState() {
     return _MainPageState();
   }
-
 }
 
 // State作成
