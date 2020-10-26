@@ -24,9 +24,10 @@ class ListPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Image.network(
-              '',
-              height: 120),
+          Image.asset(
+              "assets/ic_19.png",
+              height: 120
+          ),
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Column(
@@ -42,7 +43,7 @@ class ListPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 8),
-                    Text("12"),
+                    _buildGradeImage(12),
                   ],
                 ),
                 SizedBox(height: 10),
@@ -66,7 +67,21 @@ class ListPage extends StatelessWidget {
     );
   }
 
-// 1-3. 리스트 화면 (동적 데이터 호출1)
+  // 1-3. 리스트 화면 (동적 데이터 호출1)
 
-// 1-3. 리스트 화면 (관람 등급 이미지 버튼 함수 생성)
+  // グレードイメージ取得
+  Widget _buildGradeImage(int grade) {
+    switch (grade) {
+      case 0:
+        return Image.asset("assets/ic_allages.png");
+      case 12:
+        return Image.asset("assets/ic_12.png");
+      case 15:
+        return Image.asset("assets/ic_15.png");
+      case 19:
+        return Image.asset("assets/ic_19.png");
+      default:
+        return null;
+    }
+  }
 }
