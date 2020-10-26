@@ -5,20 +5,20 @@ import 'package:padak_starter/model/response/movies_response.dart';
 class DummysRepository {
 
 
-  // 상세 데이터
+  // 詳細データ
   static MovieResponse loadDummyMovie(String movieId) => loadMovie(movieId);
   static MovieResponse loadMovie(String movieId) {
     final targetMovieResponse = movieResponses.firstWhere((movie) => movie.id == movieId);
     return targetMovieResponse;
   }
 
-  // 영화 전체 목록
+  // 映画リスト取得
   static List<Movie> loadDummyMovies() => moviesResponse.movies;
   static MoviesResponse loadMovies(int orderType) {
     return moviesResponse;
   }
 
-  // 댓글 목록
+  // コメントリスト
   static CommentsResponse loadDummyComments(String movieId) => loadComments(movieId);
   static CommentsResponse loadComments(String movieId) {
     final targetCommentsResponse =

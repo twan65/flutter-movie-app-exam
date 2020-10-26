@@ -1,32 +1,36 @@
 import 'package:flutter/material.dart';
+import 'model/data/dummys_repository.dart';
+import 'model/response/movies_response.dart';
 
 // リスト画面
 class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // 1-3. 리스트 화면 (동적 데이터 추가)
 
-    // 初期リスト
+    // 映画リスト
+    final List<Movie> movies = DummysRepository.loadDummyMovies();
+
+    // リストビュー
     return ListView.separated(
       separatorBuilder: (_, index) => Divider(color: Colors.grey),
-      itemCount: 8,
+      itemCount: movies.length,
       itemBuilder: (context, index) {
-        return _buildDummyItem();
+        return _buildItem(movies[index]);
       },
     );
   }
 
-  // ListItem共通化
-  Widget _buildDummyItem() {
+  // リストアイテム
+  Widget _buildItem(Movie movie) {
     return Container(
       padding: EdgeInsets.all(12.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Image.asset(
-              "assets/ic_19.png",
-              height: 120
+          Image.network(
+            movie.thumb,
+            height: 120
           ),
           Padding(
             padding: EdgeInsets.all(8.0),
@@ -36,29 +40,27 @@ class ListPage extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Text(
-                      'test1',
+                      movie.title,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(width: 8),
-                    _buildGradeImage(12),
+                    _buildGradeImage(movie.grade),
                   ],
                 ),
-                SizedBox(height: 10),
-
                 Row(
                   children: <Widget>[
-                    Text('点数：139'),
+                    Text('評点：${movie.userRating / 2}'),
                     SizedBox(width: 10),
-                    Text('予約順位：1'),
+                    Text('予約順位：${movie.reservationGrade}'),
                     SizedBox(width: 10),
-                    Text('予約率：35.5')
+                    Text('予約率：${movie.reservationRate}')
                   ],
                 ),
                 SizedBox(height: 10),
-                Text('公開日：2020年10月24日')
+                Text('公開日：${movie.date}')
               ],
             ),
           )
@@ -66,8 +68,6 @@ class ListPage extends StatelessWidget {
       ),
     );
   }
-
-  // 1-3. 리스트 화면 (동적 데이터 호출1)
 
   // グレードイメージ取得
   Widget _buildGradeImage(int grade) {
