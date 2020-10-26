@@ -7,14 +7,12 @@ class ListPage extends StatelessWidget {
     // 1-3. 리스트 화면 (동적 데이터 추가)
 
     // 初期リスト
-    return ListView(
-      children: <Widget>[
-        _buildDummyItem(),
-        _buildDummyItem(),
-        _buildDummyItem(),
-        _buildDummyItem(),
-        _buildDummyItem(),
-      ]
+    return ListView.separated(
+      separatorBuilder: (_, index) => Divider(color: Colors.grey),
+      itemCount: 8,
+      itemBuilder: (context, index) {
+        return _buildDummyItem();
+      },
     );
   }
 
