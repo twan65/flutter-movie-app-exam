@@ -24,7 +24,43 @@ class GridPage extends StatelessWidget {
     Movie movie = movies[index];
 
     return Container(
-
+      padding: EdgeInsets.all(8),
+      child: Column(
+        children: <Widget>[
+          Expanded(
+              child: Stack(
+                alignment: Alignment.topRight,
+                children: <Widget>[
+                  Image.network(
+                    movie.thumb,
+                    fit: BoxFit.fill,
+                    width: double.infinity,
+                    height: double.infinity,
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    child: _buildGradeImage(movie.grade),
+                  )
+                ],
+              ),
+          ),
+          SizedBox(height: 8),
+          FittedBox(
+            child: Text(
+              movie.title,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          SizedBox(height: 8),
+          Text(
+            '${movie.reservationGrade}上（${movie.userRating}）/ ${movie.reservationRate}%'),
+          SizedBox(height: 8),
+          Text('${movie.date}'),
+        ],
+      ),
     );
   }
 
