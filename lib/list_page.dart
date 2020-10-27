@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:padak_starter/detail_page.dart';
 import 'model/data/dummys_repository.dart';
 import 'model/response/movies_response.dart';
 
@@ -15,7 +16,17 @@ class ListPage extends StatelessWidget {
       separatorBuilder: (_, index) => Divider(color: Colors.grey),
       itemCount: movies.length,
       itemBuilder: (context, index) {
-        return _buildItem(movies[index]);
+        // return _buildItem(movies[index]);
+        return InkWell(
+          child: _buildItem(movies[index]),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                  builder: (_) => DetailPage(movies[index].id)
+              ),
+            );
+          },
+        );
       },
     );
   }
