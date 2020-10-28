@@ -58,7 +58,7 @@ class GridPage extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              '${movie.reservationGrade}上（${movie.userRating}）/ ${movie.reservationRate}%'),
+              '${movie.reservationGrade} 上（${movie.userRating}）/ ${movie.reservationRate}%'),
             SizedBox(height: 8),
             Text('${movie.date}'),
           ],

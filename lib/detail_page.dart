@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 
+import 'model/data/dummys_repository.dart';
 import 'model/response/comments_response.dart';
 import 'model/response/movie_response.dart';
 
@@ -26,25 +27,38 @@ class _DetailState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    // 2-1. 상세 화면 (테스트 데이터 설정 - 영화 상세)
+    // テストデータの設定
+    _movieResponse = DummysRepository.loadDummyMovie(movieId);
 
     // 2-5. 상세 화면 (테스트 데이터 설정 - 댓글 상세)
 
     return Scaffold(
         appBar: AppBar(
           // 2-1. 상세 화면 (제목 설정)
-          title: Text('Detail'),
+          title: Text(_movieResponse.title),
         ),
-        // 2-1. 상세 화면 (전체 화면 세팅1)
-        body: Center(child: Text("Detail Page"))
+        body: _buildContents()
     );
   }
 
-  // 2-1. 상세 화면 (전체 화면 세팅2)
+  // 詳細画面の内容
+  Widget _buildContents() {
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(8),
+      child: Column(
+        children: <Widget>[
+          _buildMovieSummary(),
+          _buildMovieSynopsis(),
+          _buildMovieCast(),
+          _buildComment(),
+        ],
+      ),
+    );
+  }
 
   Widget _buildMovieSummary() {
     // 2-2. Summary 화면 (화면 구현)
-    return Text("영화 정보");
+    return Text("映画情報");
   }
 
   // 2-2. Summary 화면 (1-2 과정)
@@ -59,15 +73,15 @@ class _DetailState extends State<DetailPage> {
 
   Widget _buildMovieSynopsis() {
     // 2-3. Synopsis 화면 (화면 구현)
-    return Text("영화 줄거리");
+    return Text("映画内容略");
   }
   Widget _buildMovieCast() {
     // 2-4. MovieCast 화면 (감독 / 출연 구현)
-    return Text("감독/출연");
+    return Text("監督・出演");
   }
   Widget _buildComment() {
     // 2-5. Comment 화면 (화면 구현)
-    return Text("댓글 화면");
+    return Text("コメント");
   }
 
   // 2-5. Comment 화면 (한줄평 리스트)
