@@ -104,12 +104,30 @@ class _DetailState extends State<DetailPage> {
     );
   }
 
-  // テキスト情報
+  // 予約率
   Widget _buildReservationRate() {
-    return null;
+    return Column(
+      children: <Widget>[
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Text(
+               '予約率',
+               style: TextStyle(
+                 fontSize: 14,
+                 fontWeight: FontWeight.bold,
+               ),
+              ),
+              SizedBox(height: 10),
+              Text(
+                '${_movieResponse.reservationGrade} 上 ${_movieResponse.reservationRate.toString()}%',
+              ),
+            ],
+        ),
+      ],
+    );
   }
 
-  // 予約率
   Widget _buildVerticalDivider() {
     return null;
   }
@@ -123,14 +141,6 @@ class _DetailState extends State<DetailPage> {
   Widget _buildAudience() {
     return null;
   }
-
-  // 2-2. Summary 화면 (2-2 과정 - 예매율)
-
-  // 2-2. Summary 화면 (2-2 과정 - 평점)
-
-  // 2-2. Summary 화면 (2-2 과정 - 누적관객수)
-
-  // 2-2. Summary 화면 (2-2 과정 - 구분선)
 
   Widget _buildMovieSynopsis() {
     // 2-3. Synopsis 화면 (화면 구현)
