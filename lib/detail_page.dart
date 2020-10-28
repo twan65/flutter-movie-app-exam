@@ -41,7 +41,7 @@ class _DetailState extends State<DetailPage> {
     );
   }
 
-  // 詳細画面の内容
+  // 詳細画面の構成
   Widget _buildContents() {
     return SingleChildScrollView(
       padding: EdgeInsets.all(8),
@@ -56,12 +56,57 @@ class _DetailState extends State<DetailPage> {
     );
   }
 
+  // Summary
   Widget _buildMovieSummary() {
-    // 2-2. Summary 화면 (화면 구현)
-    return Text("映画情報");
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            Image.network(_movieResponse.image, height: 180),
+            SizedBox(width: 10),
+            _buildMovieSummaryTextColumn(),
+          ],
+        ),
+        SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            _buildReservationRate(),
+            _buildVerticalDivider(),
+            _buildUserRating(),
+            _buildVerticalDivider(),
+            _buildAudience(),
+          ],
+        ),
+      ],
+    );
   }
 
-  // 2-2. Summary 화면 (1-2 과정)
+  // テキスト情報
+  Widget _buildMovieSummaryTextColumn() {
+    return null;
+  }
+
+  // テキスト情報
+  Widget _buildReservationRate() {
+    return null;
+  }
+
+  // 予約率
+  Widget _buildVerticalDivider() {
+    return null;
+  }
+
+  // 評点
+  Widget _buildUserRating() {
+    return null;
+  }
+
+  // 累計観客数
+  Widget _buildAudience() {
+    return null;
+  }
 
   // 2-2. Summary 화면 (2-2 과정 - 예매율)
 
