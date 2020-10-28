@@ -85,7 +85,23 @@ class _DetailState extends State<DetailPage> {
 
   // テキスト情報
   Widget _buildMovieSummaryTextColumn() {
-    return null;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          _movieResponse.title,
+          style: TextStyle(fontSize: 22),
+        ),
+        Text(
+          '${_movieResponse.date} 公開',
+          style: TextStyle(fontSize: 16),
+        ),
+        Text(
+          '${_movieResponse.genre} / ${_movieResponse.duration}分',
+          style: TextStyle(fontSize: 16),
+        ),
+      ],
+    );
   }
 
   // テキスト情報
