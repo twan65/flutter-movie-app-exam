@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:intl/intl.dart';
 
 import 'model/data/dummys_repository.dart';
 import 'model/response/comments_response.dart';
@@ -21,7 +22,7 @@ class _DetailState extends State<DetailPage> {
   MovieResponse _movieResponse;
   CommentsResponse _commentsResponse;
 
-  _DetailState(String movieId){
+  _DetailState(String movieId) {
     this.movieId = movieId;
   }
 
@@ -37,8 +38,7 @@ class _DetailState extends State<DetailPage> {
           // 2-1. 상세 화면 (제목 설정)
           title: Text(_movieResponse.title),
         ),
-        body: _buildContents()
-    );
+        body: _buildContents());
   }
 
   // 詳細画面の構成
@@ -110,56 +110,90 @@ class _DetailState extends State<DetailPage> {
       children: <Widget>[
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Text(
-               '予約率',
-               style: TextStyle(
-                 fontSize: 14,
-                 fontWeight: FontWeight.bold,
-               ),
+          children: <Widget>[
+            Text(
+              '予約率',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(height: 10),
-              Text(
-                '${_movieResponse.reservationGrade} 上 ${_movieResponse.reservationRate.toString()}%',
-              ),
-            ],
+            ),
+            SizedBox(height: 10),
+            Text(
+              '${_movieResponse.reservationGrade} 上 ${_movieResponse.reservationRate.toString()}%'
+            ),
+          ],
         ),
       ],
     );
   }
 
   Widget _buildVerticalDivider() {
-    return null;
+    return Container(
+      width: 1,
+      height: 50,
+      color: Colors.grey,
+    );
   }
 
   // 評点
   Widget _buildUserRating() {
-    return null;
+    return Column(
+      children: <Widget>[
+        Text(
+          '評点',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 10),
+        Text(
+          "${_movieResponse.userRating / 2}"
+        ),
+      ],
+    );
   }
 
   // 累計観客数
   Widget _buildAudience() {
-    return null;
+    return Column(
+      children: <Widget>[
+        Text(
+          '累計観客数',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 10),
+        Text(
+          NumberFormat().format(_movieResponse.audience)
+        ),
+      ],
+    );
   }
 
   Widget _buildMovieSynopsis() {
     // 2-3. Synopsis 화면 (화면 구현)
     return Text("映画内容略");
   }
+
   Widget _buildMovieCast() {
     // 2-4. MovieCast 화면 (감독 / 출연 구현)
     return Text("監督・出演");
   }
+
   Widget _buildComment() {
     // 2-5. Comment 화면 (화면 구현)
     return Text("コメント");
   }
 
-  // 2-5. Comment 화면 (한줄평 리스트)
+// 2-5. Comment 화면 (한줄평 리스트)
 
-  // 2-5. Comment 화면 (한줄평 아이템 화면 구축)
+// 2-5. Comment 화면 (한줄평 아이템 화면 구축)
 
-  // 2-5. Comment 화면 (포맷에 맞춰 날짜 데이터 반환)
+// 2-5. Comment 화면 (포맷에 맞춰 날짜 데이터 반환)
 
-  // 2-5. Comment 화면 (댓글 입력 창으로 이동)
+// 2-5. Comment 화면 (댓글 입력 창으로 이동)
 }
