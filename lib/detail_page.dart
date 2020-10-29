@@ -300,10 +300,12 @@ class _DetailState extends State<DetailPage> {
     );
   }
 
+  // TODO
   void _presentCommentPage(BuildContext context) {
 
   }
 
+  // TODO
   Widget _buildItem({@required Comment comment}) {
     return null;
   }
