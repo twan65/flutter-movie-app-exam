@@ -35,7 +35,6 @@ class _DetailState extends State<DetailPage> {
 
     return Scaffold(
         appBar: AppBar(
-          // 2-1. 상세 화면 (제목 설정)
           title: Text(_movieResponse.title),
         ),
         body: _buildContents());
@@ -174,9 +173,33 @@ class _DetailState extends State<DetailPage> {
     );
   }
 
+  // 映画流れの略：Synopsis
   Widget _buildMovieSynopsis() {
-    // 2-3. Synopsis 화면 (화면 구현)
-    return Text("映画内容略");
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 10),
+          width: double.infinity,
+          height: 10,
+          color: Colors.grey.shade400,
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 10),
+          child: Text(
+            'Synopsis',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 16, top: 10, bottom: 5),
+          child: Text(_movieResponse.synopsis),
+        )
+      ],
+    );
   }
 
   Widget _buildMovieCast() {
