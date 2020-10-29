@@ -28,10 +28,11 @@ class _DetailState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    // テストデータの設定
+    // 仮映画情報取得
     _movieResponse = DummysRepository.loadDummyMovie(movieId);
 
-    // 2-5. 상세 화면 (테스트 데이터 설정 - 댓글 상세)
+    // 仮コメントデータ取得
+    _commentsResponse = DummysRepository.loadComments(movieId);
 
     return Scaffold(
         appBar: AppBar(
@@ -119,8 +120,7 @@ class _DetailState extends State<DetailPage> {
             ),
             SizedBox(height: 10),
             Text(
-              '${_movieResponse.reservationGrade} 上 ${_movieResponse.reservationRate.toString()}%'
-            ),
+                '${_movieResponse.reservationGrade} 上 ${_movieResponse.reservationRate.toString()}%'),
           ],
         ),
       ],
@@ -147,9 +147,7 @@ class _DetailState extends State<DetailPage> {
           ),
         ),
         SizedBox(height: 10),
-        Text(
-          "${_movieResponse.userRating / 2}"
-        ),
+        Text("${_movieResponse.userRating / 2}"),
       ],
     );
   }
@@ -166,9 +164,7 @@ class _DetailState extends State<DetailPage> {
           ),
         ),
         SizedBox(height: 10),
-        Text(
-          NumberFormat().format(_movieResponse.audience)
-        ),
+        Text(NumberFormat().format(_movieResponse.audience)),
       ],
     );
   }
@@ -257,14 +253,60 @@ class _DetailState extends State<DetailPage> {
     );
   }
 
+  // コメント表示
   Widget _buildComment() {
-    // 2-5. Comment 화면 (화면 구현)
-    return Text("コメント");
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 10),
+          width: double.infinity,
+          height: 10,
+          color: Colors.grey.shade400,
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                '一行評',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              IconButton(
+                  icon: Icon(Icons.create),
+                  color: Colors.blue,
+                  onPressed: () => _presentCommentPage(context),
+              )
+            ],
+          ),
+        ),
+        _buildCommentListView()
+      ],
+    );
   }
 
-// 2-5. Comment 화면 (한줄평 리스트)
+  Widget _buildCommentListView() {
+    return ListView.builder(
+      shrinkWrap: true,
+      primary: false,
+      padding: EdgeInsets.all(10.0),
+      itemCount: _commentsResponse.comments.length,
+      itemBuilder: (_, index) =>
+        _buildItem(comment: _commentsResponse.comments[index]),
+    );
+  }
 
-// 2-5. Comment 화면 (한줄평 아이템 화면 구축)
+  void _presentCommentPage(BuildContext context) {
+
+  }
+
+  Widget _buildItem({@required Comment comment}) {
+    return null;
+  }
 
 // 2-5. Comment 화면 (포맷에 맞춰 날짜 데이터 반환)
 
