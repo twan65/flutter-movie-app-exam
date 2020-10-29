@@ -135,7 +135,7 @@ class _DetailState extends State<DetailPage> {
     );
   }
 
-  // 評点
+  // 評点の表示
   Widget _buildUserRating() {
     return Column(
       children: <Widget>[
@@ -154,7 +154,7 @@ class _DetailState extends State<DetailPage> {
     );
   }
 
-  // 累計観客数
+  // 累計観客数の表示
   Widget _buildAudience() {
     return Column(
       children: <Widget>[
@@ -173,7 +173,7 @@ class _DetailState extends State<DetailPage> {
     );
   }
 
-  // 映画流れの略：Synopsis
+  // 映画流れの略：Synopsis表示
   Widget _buildMovieSynopsis() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -202,9 +202,59 @@ class _DetailState extends State<DetailPage> {
     );
   }
 
+  // 監督・出演の表示
   Widget _buildMovieCast() {
-    // 2-4. MovieCast 화면 (감독 / 출연 구현)
-    return Text("監督・出演");
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 10),
+          width: double.infinity,
+          height: 10,
+          color: Colors.grey.shade400,
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 10),
+          child: Text(
+            '監督・出演',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 16, top: 10, bottom: 5),
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Text(
+                    '監督',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(width: 10),
+                  Text(_movieResponse.director),
+                ],
+              ),
+              SizedBox(height: 5),
+              Row(
+                children: <Widget>[
+                  Text(
+                    '出演',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(_movieResponse.actor),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        )
+      ],
+    );
   }
 
   Widget _buildComment() {
