@@ -305,12 +305,41 @@ class _DetailState extends State<DetailPage> {
 
   }
 
-  // TODO
   Widget _buildItem({@required Comment comment}) {
-    return null;
+    return Container(
+      margin: EdgeInsets.all(10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Icon(
+            Icons.person_pin,
+            size: 50,
+          ),
+          SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Text(comment.writer),
+                  SizedBox(width: 5),
+                ],
+              ),
+              Text(_convertTimeStampToDateTime(comment.timestamp)),
+              SizedBox(height: 5),
+              Text(comment.contents)
+            ],
+          )
+        ],
+      ),
+    );
   }
 
-// 2-5. Comment 화면 (포맷에 맞춰 날짜 데이터 반환)
+  // 日付フォーマットに変換
+  String _convertTimeStampToDateTime(int timestamp) {
+    final dateFormatter = DateFormat('yyyy-MM-dd HH:mm:ss');
+    return dateFormatter.format(DateTime.fromMillisecondsSinceEpoch(timestamp * 1000));
+  }
 
 // 2-5. Comment 화면 (댓글 입력 창으로 이동)
 }
