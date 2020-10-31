@@ -28,40 +28,53 @@ class CommentPageState extends State<CommentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: scaffoldState,
-        appBar: AppBar(
-          title: Text('一行評'),
-          actions: <Widget>[
-            _buildSubmitButton(),
-          ],
-        ),
-        body: WillPopScope(
-          child: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildMovieTitle(),
-                  _buildUserRating(),
-                  _buildHorizontalDivider(),
-                  _buildNickNameInputForm(),
-                  _buildCommentInputForm(),
-                ],
-              ),
+      key: scaffoldState,
+      appBar: AppBar(
+        title: Text('一行評'),
+        actions: <Widget>[
+          _buildSubmitButton(),
+        ],
+      ),
+      body: WillPopScope(
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildMovieTitle(),
+                _buildUserRating(),
+                _buildHorizontalDivider(),
+                _buildNickNameInputForm(),
+                _buildCommentInputForm(),
+              ],
             ),
           ),
-          onWillPop: () {
-            Navigator.of(context).pop(false);
-            return Future.value(false);
-          },
         ),
+        onWillPop: () {
+          Navigator.of(context).pop(false);
+          return Future.value(false);
+        },
+      ),
     );
   }
 
   Widget _buildSubmitButton() {
-    // 3-2. 댓글 입력 화면 (_buildSubmitButton)
-    return Center(child: Text("전송"));
+    final sendIcon = Icon(
+      Icons.send,
+      color: Colors.white,
+      size: 25,
+    );
+
+    return IconButton(
+        icon: sendIcon,
+        onPressed: () {
+          if (_writer.isEmpty || _contents.isEmpty) {
+            _showSnackBar('全ての情報を入力してください。');
+          } else {
+            Navigator.of(context).pop(true);
+          }
+        });
   }
 
   Widget _buildMovieTitle() {
