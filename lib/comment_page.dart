@@ -19,48 +19,72 @@ class CommentPageState extends State<CommentPage> {
   String _writer = "";
   String _contents = "";
 
-  CommentPageState(String movieTitle, String movieId){
+  CommentPageState(String movieTitle, String movieId) {
     this.movieTitle = movieTitle;
     this.movieId = movieId;
   }
 
-  // 3-1. 댓글 입력 화면 (화면 구현)
+  // コメント入力画面
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: scaffoldState,
         appBar: AppBar(
-          title: Text('한줄평 작성'),
+          title: Text('一行評'),
+          actions: <Widget>[
+            _buildSubmitButton(),
+          ],
         ),
-        body: Center(child: Text("Comment Page"))
+        body: WillPopScope(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildMovieTitle(),
+                  _buildUserRating(),
+                  _buildHorizontalDivider(),
+                  _buildNickNameInputForm(),
+                  _buildCommentInputForm(),
+                ],
+              ),
+            ),
+          ),
+          onWillPop: () {
+            Navigator.of(context).pop(false);
+            return Future.value(false);
+          },
+        ),
     );
   }
 
-  Widget _buildSubmitButton(){
+  Widget _buildSubmitButton() {
     // 3-2. 댓글 입력 화면 (_buildSubmitButton)
     return Center(child: Text("전송"));
   }
 
-  Widget _buildMovieTitle(){
+  Widget _buildMovieTitle() {
     // 3-3. 댓글 입력 화면 (_buildMovieTitle)
     return Text("영화 제목");
   }
 
-  Widget _buildUserRating(){
+  Widget _buildUserRating() {
     // 3-4. 댓글 입력 화면 (_buildUserRating)
     return Text("유저가 별점을 설정할 수 있는 화면");
   }
 
-  Widget _buildHorizontalDivider(){
+  Widget _buildHorizontalDivider() {
     // 3-5. 댓글 입력 화면 (_buildHorizontalDivider)
     return Text("회색 구분선 화면");
   }
 
-  Widget _buildNickNameInputForm(){
+  Widget _buildNickNameInputForm() {
     // 3-6. 댓글 입력 화면 (_buildNickNameInputForm)
     return Text("닉네임 입력");
   }
 
-  Widget _buildCommentInputForm(){
+  Widget _buildCommentInputForm() {
     // 3-7. 댓글 입력 화면 (_buildCommentInputForm)
     return Text("한줄평 입력");
   }
