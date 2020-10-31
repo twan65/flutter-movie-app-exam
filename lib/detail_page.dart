@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:intl/intl.dart';
 
+import 'comment_page.dart';
 import 'model/data/dummys_repository.dart';
 import 'model/response/comments_response.dart';
 import 'model/response/movie_response.dart';
@@ -300,9 +301,12 @@ class _DetailState extends State<DetailPage> {
     );
   }
 
-  // TODO
+  // コメント入力画面に遷移
   void _presentCommentPage(BuildContext context) {
-
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommentPage(
+      _movieResponse.title,
+      _movieResponse.id,
+    ),));
   }
 
   Widget _buildItem({@required Comment comment}) {
@@ -341,5 +345,4 @@ class _DetailState extends State<DetailPage> {
     return dateFormatter.format(DateTime.fromMillisecondsSinceEpoch(timestamp * 1000));
   }
 
-// 2-5. Comment 화면 (댓글 입력 창으로 이동)
 }
