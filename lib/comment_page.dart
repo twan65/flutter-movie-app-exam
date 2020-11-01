@@ -107,7 +107,6 @@ class CommentPageState extends State<CommentPage> {
   }
 
   Widget _buildHorizontalDivider() {
-    // 3-5. 댓글 입력 화면 (_buildHorizontalDivider)
     return Text("회색 구분선 화면");
   }
 
