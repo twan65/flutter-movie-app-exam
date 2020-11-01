@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:padak_starter/model/widget/star_rating_bar.dart';
 
 class CommentPage extends StatefulWidget {
   final String movieTitle;
@@ -91,8 +92,18 @@ class CommentPageState extends State<CommentPage> {
   }
 
   Widget _buildUserRating() {
-    // 3-4. 댓글 입력 화면 (_buildUserRating)
-    return Text("유저가 별점을 설정할 수 있는 화면");
+    return Column(
+      children: [
+        StarRatingBar(
+          onRatingChanged: (rating) {
+            setState(() {
+              _rating = rating;
+            });
+          },
+        ),
+        Text((_rating / 2.0).toString())
+      ],
+    );
   }
 
   Widget _buildHorizontalDivider() {
