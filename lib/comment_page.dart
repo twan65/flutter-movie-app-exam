@@ -107,7 +107,12 @@ class CommentPageState extends State<CommentPage> {
   }
 
   Widget _buildHorizontalDivider() {
-    return Text("회색 구분선 화면");
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 14, horizontal: 4),
+      width: double.infinity,
+      height: 10,
+      color: Colors.grey.shade400,
+    );
   }
 
   Widget _buildNickNameInputForm() {
