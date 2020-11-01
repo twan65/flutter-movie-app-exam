@@ -78,8 +78,16 @@ class CommentPageState extends State<CommentPage> {
   }
 
   Widget _buildMovieTitle() {
-    // 3-3. 댓글 입력 화면 (_buildMovieTitle)
-    return Text("영화 제목");
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Text(
+        widget.movieTitle,
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
   }
 
   Widget _buildUserRating() {
