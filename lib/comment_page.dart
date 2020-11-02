@@ -135,9 +135,26 @@ class CommentPageState extends State<CommentPage> {
     );
   }
 
+  // 一行評入力
   Widget _buildCommentInputForm() {
-    // 3-7. 댓글 입력 화면 (_buildCommentInputForm)
-    return Text("한줄평 입력");
+    return Container(
+      margin: EdgeInsets.only(
+        left: 10, right: 10, top: 20, bottom: 10
+      ),
+      child: TextField(
+        onChanged: (text) => _contents = text,
+        maxLines: null,
+        maxLength: 200,
+        decoration: InputDecoration(
+            hintText: '一行評を入力してください',
+            fillColor: Colors.white,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(),
+            )
+        ),
+      ),
+    );
   }
 
   void _showSnackBar(String text) {
