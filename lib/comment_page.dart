@@ -115,9 +115,24 @@ class CommentPageState extends State<CommentPage> {
     );
   }
 
+  // ニックネーム入力
   Widget _buildNickNameInputForm() {
-    // 3-6. 댓글 입력 화면 (_buildNickNameInputForm)
-    return Text("닉네임 입력");
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      child: TextField(
+        onChanged: (text) => _writer = text,
+        maxLines: 1,
+        maxLength: 20,
+        decoration: InputDecoration(
+          hintText: 'ニックネームを入力してください',
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(),
+          )
+        ),
+      ),
+    );
   }
 
   Widget _buildCommentInputForm() {
