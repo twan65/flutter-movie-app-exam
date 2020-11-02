@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:intl/intl.dart';
+import 'package:padak_starter/model/widget/star_rating_bar.dart';
 
 import 'comment_page.dart';
 import 'model/data/dummys_repository.dart';
@@ -327,6 +328,11 @@ class _DetailState extends State<DetailPage> {
                 children: <Widget>[
                   Text(comment.writer),
                   SizedBox(width: 5),
+                  StarRatingBar(
+                    rating: comment.rating.toInt(),
+                    isUserInteractionEnabled: false,
+                    size: 20,
+                  )
                 ],
               ),
               Text(_convertTimeStampToDateTime(comment.timestamp)),
