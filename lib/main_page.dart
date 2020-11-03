@@ -109,15 +109,21 @@ class _MainPageState extends State<MainPage> {
 // List, Grid Widget変換
 Widget _buildPage(index, MoviesResponse moviesResponse) {
   Widget contentsWidget;
-  switch(index) {
-    case 0:
-      contentsWidget = ListPage(moviesResponse.movies);
-      break;
-    case 1:
-      contentsWidget = GridPage(moviesResponse.movies);
-      break;
-    default:
-      contentsWidget = Container();
+
+  if (moviesResponse == null) {
+    contentsWidget = Center(child: CircularProgressIndicator());
+  } else {
+    switch(index) {
+      case 0:
+        contentsWidget = ListPage(moviesResponse.movies);
+        break;
+      case 1:
+        contentsWidget = GridPage(moviesResponse.movies);
+        break;
+      default:
+        contentsWidget = Container();
+    }
   }
+
   return contentsWidget;
 }
