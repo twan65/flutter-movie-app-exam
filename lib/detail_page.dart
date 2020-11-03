@@ -2,6 +2,9 @@ import "package:flutter/material.dart";
 import 'package:intl/intl.dart';
 import 'package:padak_starter/model/widget/star_rating_bar.dart';
 
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 import 'comment_page.dart';
 import 'model/data/dummys_repository.dart';
 import 'model/response/comments_response.dart';
@@ -28,34 +31,52 @@ class _DetailState extends State<DetailPage> {
     this.movieId = movieId;
   }
 
+  // 初期処理
+  @override
+  void initState() {
+    super.initState();
+    _requestMovie();
+  }
+
   @override
   Widget build(BuildContext context) {
     // 仮映画情報取得
-    _movieResponse = DummysRepository.loadDummyMovie(movieId);
+    // _movieResponse = DummysRepository.loadDummyMovie(movieId);
 
     // 仮コメントデータ取得
     _commentsResponse = DummysRepository.loadComments(movieId);
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(_movieResponse.title),
+          title: Text(_movieTitle),
         ),
         body: _buildContents());
   }
 
   // 詳細画面の構成
   Widget _buildContents() {
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(8),
-      child: Column(
-        children: <Widget>[
-          _buildMovieSummary(),
-          _buildMovieSynopsis(),
-          _buildMovieCast(),
-          _buildComment(),
-        ],
-      ),
-    );
+
+    Widget contentsWidget;
+
+    if (_movieResponse == null) {
+      contentsWidget = Center(
+        child: CircularProgressIndicator(),
+      );
+    } else {
+      contentsWidget = SingleChildScrollView(
+        padding: EdgeInsets.all(8),
+        child: Column(
+          children: <Widget>[
+            _buildMovieSummary(),
+            _buildMovieSynopsis(),
+            _buildMovieCast(),
+            _buildComment(),
+          ],
+        ),
+      );
+    }
+
+    return contentsWidget;
   }
 
   // Summary
@@ -344,6 +365,37 @@ class _DetailState extends State<DetailPage> {
       ),
     );
   }
+
+  void _requestMovie() async {
+    // 映画リストの初期化
+    setState(() {
+      _movieResponse = null;
+    });
+
+    final movieResponse = await _getMovieResponse();
+
+    setState(() {
+      _movieResponse = movieResponse;
+      _movieTitle = movieResponse.title;
+    });
+
+  }
+
+  Future<MovieResponse> _getMovieResponse() async {
+    // データ取得
+    final response = await http.get(
+        'http://padakpadak.run.goorm.io/movie?id=${widget.movieId}'
+    );
+
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      final movieResponse = MovieResponse.fromJson(jsonData);
+      return movieResponse;
+    }
+
+    return null;
+  }
+
 
   // 日付フォーマットに変換
   String _convertTimeStampToDateTime(int timestamp) {
