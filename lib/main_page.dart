@@ -1,4 +1,9 @@
 import "package:flutter/material.dart";
+import 'dart:convert';
+
+import 'package:padak_starter/model/response/movie_response.dart';
+import 'package:http/http.dart' as http;
+import 'package:padak_starter/model/response/movies_response.dart';
 
 import 'grid_page.dart';
 import 'list_page.dart';
@@ -16,6 +21,15 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
 
   int _selectedTabIndex = 0;
+  int _selectedSortIndex = 0;
+  MoviesResponse _moviesResponse;
+
+  // 初期処理
+  @override
+  void initState() {
+    super.initState();
+    _requestMovies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +82,29 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
+
+  void _requestMovies() async {
+    // 映画リストの初期化
+    setState(() {
+      _moviesResponse = null;
+    });
+
+    // データ取得
+    final response = await http.get(
+      'http://padakpadak.run.goorm.io/movies?order_type$_selectedSortIndex'
+    );
+
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      final moviesResponse = MoviesResponse.fromJson(jsonData);
+      setState(() {
+        _moviesResponse = moviesResponse;
+        print(_moviesResponse.movies[0].title);
+      });
+    }
+
+  }
+
 }
 
 // List, Grid Widget変換
