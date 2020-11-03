@@ -39,21 +39,7 @@ class _MainPageState extends State<MainPage> {
         title: Text('Twan Movie'),
         // ポップアップボタン及びイベント追加
         actions: <Widget>[
-          PopupMenuButton<int>(
-              icon: Icon(Icons.sort),
-              onSelected: (value) {
-                if(value == 0) print("予約数順");
-                else if(value == 1) print("キュレーション");
-                else print("最新順");
-              },
-              itemBuilder: (context) {
-                return [
-                  PopupMenuItem(value: 0, child: Text("予約数順")),
-                  PopupMenuItem(value: 1, child: Text("キュレーション")),
-                  PopupMenuItem(value: 2, child: Text("最新順")),
-                ];
-              }
-          ),
+          _buildPopupMenuButton()
         ],
       ),
 
@@ -91,7 +77,7 @@ class _MainPageState extends State<MainPage> {
 
     // データ取得
     final response = await http.get(
-      'http://padakpadak.run.goorm.io/movies?order_type$_selectedSortIndex'
+      'http://padakpadak.run.goorm.io/movies?order_type=$_selectedSortIndex'
     );
 
     if (response.statusCode == 200) {
@@ -101,7 +87,32 @@ class _MainPageState extends State<MainPage> {
         _moviesResponse = moviesResponse;
       });
     }
+  }
 
+  Widget _buildPopupMenuButton() {
+    return PopupMenuButton<int>(
+        icon: Icon(Icons.sort),
+        onSelected: _onSortMethodTap,
+        itemBuilder: (context) {
+          return [
+            PopupMenuItem(value: 0, child: Text("予約数順")),
+            PopupMenuItem(value: 1, child: Text("キュレーション")),
+            PopupMenuItem(value: 2, child: Text("最新順")),
+          ];
+        }
+    );
+  }
+
+  void _onSortMethodTap(index) {
+    setState(() {
+      _selectedSortIndex = index;
+
+      if(index == 0) print("予約数順");
+      else if(index == 1) print("キュレーション");
+      else print("最新順");
+    });
+
+    _requestMovies();
   }
 
 }
