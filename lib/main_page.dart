@@ -58,7 +58,7 @@ class _MainPageState extends State<MainPage> {
       ),
 
       // List, Grid Widget連動
-      body: _buildPage(_selectedTabIndex),
+      body: _buildPage(_selectedTabIndex, _moviesResponse),
 
       // bottomNavigationBar
       bottomNavigationBar: BottomNavigationBar(
@@ -99,7 +99,6 @@ class _MainPageState extends State<MainPage> {
       final moviesResponse = MoviesResponse.fromJson(jsonData);
       setState(() {
         _moviesResponse = moviesResponse;
-        print(_moviesResponse.movies[0].title);
       });
     }
 
@@ -108,7 +107,17 @@ class _MainPageState extends State<MainPage> {
 }
 
 // List, Grid Widget変換
-Widget _buildPage(index) {
-  if(index == 0) return ListPage();
-  else return GridPage();
+Widget _buildPage(index, MoviesResponse moviesResponse) {
+  Widget contentsWidget;
+  switch(index) {
+    case 0:
+      contentsWidget = ListPage(moviesResponse.movies);
+      break;
+    case 1:
+      contentsWidget = GridPage(moviesResponse.movies);
+      break;
+    default:
+      contentsWidget = Container();
+  }
+  return contentsWidget;
 }

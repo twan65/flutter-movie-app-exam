@@ -5,7 +5,10 @@ import 'model/data/dummys_repository.dart';
 import 'model/response/movies_response.dart';
 
 class GridPage extends StatelessWidget {
-  final List<Movie> movies = DummysRepository.loadDummyMovies();
+
+  // 映画リスト
+  final List<Movie> movies;
+  GridPage(this.movies);
 
   @override
   Widget build(BuildContext context) {

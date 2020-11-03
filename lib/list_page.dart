@@ -5,11 +5,13 @@ import 'model/response/movies_response.dart';
 
 // リスト画面
 class ListPage extends StatelessWidget {
+
+  // 映画リスト
+  final List<Movie> movies;
+  ListPage(this.movies);
+
   @override
   Widget build(BuildContext context) {
-
-    // 映画リスト
-    final List<Movie> movies = DummysRepository.loadDummyMovies();
 
     // リストビュー
     return ListView.separated(
