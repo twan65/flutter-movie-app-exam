@@ -44,7 +44,7 @@ class _DetailState extends State<DetailPage> {
     // _movieResponse = DummysRepository.loadDummyMovie(movieId);
 
     // 仮コメントデータ取得
-    _commentsResponse = DummysRepository.loadComments(movieId);
+    // _commentsResponse = DummysRepository.loadComments(movieId);
 
     return Scaffold(
         appBar: AppBar(
@@ -313,14 +313,23 @@ class _DetailState extends State<DetailPage> {
   }
 
   Widget _buildCommentListView() {
-    return ListView.builder(
-      shrinkWrap: true,
-      primary: false,
-      padding: EdgeInsets.all(10.0),
-      itemCount: _commentsResponse.comments.length,
-      itemBuilder: (_, index) =>
-        _buildItem(comment: _commentsResponse.comments[index]),
-    );
+
+    Widget contentsWidget;
+
+    if (_commentsResponse == null) {
+      contentsWidget = Center(child: CircularProgressIndicator());
+    } else {
+      contentsWidget = ListView.builder(
+        shrinkWrap: true,
+        primary: false,
+        padding: EdgeInsets.all(10.0),
+        itemCount: _commentsResponse.comments.length,
+        itemBuilder: (_, index) =>
+          _buildItem(comment: _commentsResponse.comments[index]),
+      );
+    }
+
+    return contentsWidget;
   }
 
   // コメント入力画面に遷移
@@ -370,17 +379,21 @@ class _DetailState extends State<DetailPage> {
     // 映画リストの初期化
     setState(() {
       _movieResponse = null;
+      _commentsResponse = null;
     });
 
     final movieResponse = await _getMovieResponse();
+    final commentsResponse = await _getCommentsResponse();
 
     setState(() {
       _movieResponse = movieResponse;
       _movieTitle = movieResponse.title;
+      _commentsResponse = commentsResponse;
     });
 
   }
 
+  // 詳細データ取得
   Future<MovieResponse> _getMovieResponse() async {
     // データ取得
     final response = await http.get(
@@ -391,6 +404,22 @@ class _DetailState extends State<DetailPage> {
       final jsonData = json.decode(response.body);
       final movieResponse = MovieResponse.fromJson(jsonData);
       return movieResponse;
+    }
+
+    return null;
+  }
+
+  // コメント取得
+  Future<CommentsResponse> _getCommentsResponse() async {
+    // データ取得
+    final response = await http.get(
+        'http://padakpadak.run.goorm.io/comments?movie_id=${widget.movieId}'
+    );
+
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      final commentsResponse = CommentsResponse.fromJson(jsonData);
+      return commentsResponse;
     }
 
     return null;
