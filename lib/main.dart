@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:padak_starter/main_page.dart';
+import 'package:padak_starter/login.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +12,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainPage(),
+      // home: MainPage(),
+      home: LoginPage(),
     );
   }
 }
