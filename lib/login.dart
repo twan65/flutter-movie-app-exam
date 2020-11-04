@@ -1,8 +1,7 @@
 import "package:flutter/material.dart";
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
-import 'package:padak_starter/model/response/movies_response.dart';
+import 'package:padak_starter/main_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -15,17 +14,37 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final formKey = new GlobalKey<FormState>();
 
+  final adminId = 'test';
+  final adminPw = 'test';
+
   String _email;
   String _password;
 
-  void validateAndSave() {
+  bool validateAndSave() {
     final form = formKey.currentState;
 
-    if(form.validate()) {
+    if (form.validate()) {
       form.save();
-      print('Form is valid. Email: $_email, password: $_password');
-    } else {
-      print('Form is Invalid. Email: $_email, password: $_password');
+      return true;
+    }
+
+    return false;
+  }
+
+  void validateAndSubmit() {
+    if (validateAndSave()) {
+      if (_email == adminId && _password == adminId) {
+
+        // TODO: セッション保存
+
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => MainPage(),
+          ),
+        );
+      } else {
+        // TODO: ログイン失敗時の処理
+      }
     }
   }
 
@@ -65,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                 new RaisedButton(
                   child:
                       new Text('Login', style: new TextStyle(fontSize: 20.0)),
-                  onPressed: validateAndSave,
+                  onPressed: validateAndSubmit,
                 ),
               ],
             )));
