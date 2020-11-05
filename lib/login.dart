@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Login'),
+        title: new Text('ログイン'),
       ),
       body: _buildPage(),
     );
