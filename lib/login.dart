@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'dart:convert';
 
 import 'package:padak_starter/main_page.dart';
+import 'package:padak_starter/signup.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -83,8 +84,15 @@ class _LoginPageState extends State<LoginPage> {
                 //追加
                 new RaisedButton(
                   child:
-                      new Text('Login', style: new TextStyle(fontSize: 20.0)),
+                      new Text('Login', style: new TextStyle(fontSize: 20.0, color: Colors.blue)),
                   onPressed: validateAndSubmit,
+                ),
+                new RaisedButton(
+                  child:
+                  new Text('Sign Up', style: new TextStyle(fontSize: 20.0)),
+                  onPressed: () => {
+
+                  },
                 ),
               ],
             )));
